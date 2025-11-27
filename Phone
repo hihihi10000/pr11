@@ -1,63 +1,51 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConsoleApp8
+public class Phone
 {
-    public class Phone
-    {
-        private int battery;
+    private int battery;
 
-        public int BatteryLevel
+    public int BatteryLevel
+    {
+        get { return battery; }
+        set
         {
-            get { return battery; }
-            set
+            if (value < 0)
             {
-                if (value < 0)
-                {
-                    battery = 0;
-                    return;
-                }
-                if (value > 100)
-                {
-                    Console.WriteLine("Заряд не может превышать 100!");
-                    return;
-                }
+                battery = 0;
+            }
+            else if (value > 100)
+            {
+                Console.WriteLine("Заряд не может превышать 100!");
+            }
+            else
+            {
                 battery = value;
             }
         }
+    }
 
-        public string Brand { get; set; }
+    public string Brand { get; init; }
 
-        public Phone(string brand, int initialCharge)
-        {
-            Brand = brand;
-            BatteryLevel = initialCharge;
-        }
-        public void Use()
-        {
-            BatteryLevel -= 10;
-            Console.WriteLine($"{Brand}: заряд {BatteryLevel}%.");
-        }
+    public Phone(string brand, int initialCharge)
+    {
+        Brand = brand;
+        BatteryLevel = initialCharge;
+    }
 
-        static void Main()
-        {
-            Phone phone1 = new Phone("Samsung", 80);
-            Phone phone2 = new Phone("iPhone", 120);
+    public void Use()
+    {
+        BatteryLevel -= 10;
+        Console.WriteLine($"{Brand}: заряд {BatteryLevel}%.");
+    }
 
-            phone1.Use();
-            phone2.Use();
-
-            phone1.Use();
-            phone1.Use();
-
-            phone1.BatteryLevel = 150;
-            phone2.BatteryLevel = 50;
-
-            phone1.Use();
-            phone2.Use();
-        }
+    static void Main()
+    {
+        Phone phone = new Phone("Samsung", 80);
+        
+        phone.Use();
+        phone.Use();
+        phone.Use();
+        
+        phone.BatteryLevel = 150;
     }
 }
