@@ -3,6 +3,7 @@ using System;
 public class Car
 {
     private int speed;
+
     public int Speed
     {
         get { return speed; }
@@ -18,33 +19,29 @@ public class Car
             }
         }
     }
-    
+
     public string Model { get; set; } = "Unknown";
+
     public Car(string model, int speed)
     {
         Model = model;
         Speed = speed;
     }
+
     public void Drive()
     {
         Console.WriteLine($"{Model} едет со скоростью {Speed} км/ч.");
     }
-    
+
     static void Main()
     {
-        Car car1 = new Car("Toyota", 120);
-        Car car2 = new Car("BMW", 250);
-        
-        car1.Drive();
-        car2.Drive();
-        
-        car1.Speed = 180;
-        car1.Drive();
-        
-        car2.Speed = 350;
-        car2.Drive();
-        
-        car1.Speed = -50;
-        car1.Drive();
+        Car car = new Car("BMW", 150);
+        car.Drive();
+
+        car.Speed = 400;
+        car.Drive();
+
+        car.Speed = -50;
+        car.Drive();
     }
 }
