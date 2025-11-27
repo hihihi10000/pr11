@@ -1,0 +1,77 @@
+using System;
+
+public class Player
+{
+    private int level;
+    private int health;
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            if (value >= 1 && value <= 100)
+            {
+                level = value;
+            }
+            else
+            {
+                Console.WriteLine("Уровень должен быть от 1 до 100!");
+            }
+        }
+    }
+
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            if (value >= 0 && value <= 100)
+            {
+                health = value;
+            }
+            else if (value < 0)
+            {
+                health = 0;
+            }
+            else
+            {
+                health = 100;
+            }
+        }
+    }
+
+    public string Name { get; init; }
+
+    public bool IsAlive
+    {
+        get { return Health > 0; }
+    }
+
+    public Player(string name, int level, int health)
+    {
+        Name = name;
+        Level = level;
+        Health = health;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        string aliveText = IsAlive ? "да" : "нет";
+        Console.WriteLine($"Игрок: {Name}, уровень: {Level}, здоровье: {Health}, жив: {aliveText}");
+    }
+
+    static void Main()
+    {
+        Player player = new Player("Alex", 5, 70);
+        
+        string aliveText = player.IsAlive ? "да" : "нет";
+        Console.WriteLine($"Игрок: {player.Name}, уровень: {player.Level}, здоровье: {player.Health}, жив: {aliveText}");
+        
+        player.TakeDamage(30);
+        player.TakeDamage(40);
+        
+        player.Level = 0;
+    }
+}
